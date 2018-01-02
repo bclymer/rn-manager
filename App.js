@@ -3,9 +3,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
+import { StackNavigator } from 'react-navigation';
 
 import reducers from './src/reducers';
-import LoginForm from './src/components/LoginForm';
+import AppWithNavigationState from './src/routers/AppNavigator';
 
 class App extends Component {
 
@@ -26,7 +27,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <LoginForm />
+        <AppWithNavigationState />
       </Provider>
     );
   }

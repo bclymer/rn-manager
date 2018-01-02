@@ -7,6 +7,10 @@ import { emailChanged, passwordChanged, loginUser } from '../actions';
 
 class LoginForm extends Component {
 
+    static navigationOptions = {
+        title: 'Daily Budget'
+    };
+
     onEmailChange(text) {
         this.props.emailChanged(text);
     }
