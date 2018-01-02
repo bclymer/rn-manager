@@ -7,9 +7,9 @@ import LoginForm from '../components/LoginForm';
 import MainScreen from '../components/MainScreen';
 
 const AppRouteConfigs = {
-    Login: { screen: LoginForm },
-    Main: { screen: MainScreen },
-}
+  Login: { screen: LoginForm },
+  Main: { screen: MainScreen },
+};
 
 export const AppNavigator = StackNavigator(AppRouteConfigs);
 

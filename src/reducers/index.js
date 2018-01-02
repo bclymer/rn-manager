@@ -3,6 +3,6 @@ import AuthReducer from './AuthReducer';
 import NavReducer from './NavReducer';
 
 export default combineReducers({
-    auth: AuthReducer,
-    nav: NavReducer
+  auth: AuthReducer,
+  nav: NavReducer,
 });
