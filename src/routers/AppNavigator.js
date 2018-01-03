@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import LoginForm from '../components/LoginForm';
-import MainScreen from '../components/MainScreen';
+import EmployeeList from '../components/EmployeeList';
+import EmployeeCreate from '../components/EmployeeCreate';
 
 const AppRouteConfigs = {
   Login: { screen: LoginForm },
-  Main: { screen: MainScreen },
+  EmployeeList: { screen: EmployeeList },
+  EmployeeCreate: { screen: EmployeeCreate },
 };
 
 export const AppNavigator = StackNavigator(AppRouteConfigs);

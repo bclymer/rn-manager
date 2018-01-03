@@ -5,6 +5,7 @@ import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
   LOGIN_USER_FAILURE,
+  LOGIN_USER_SUCCESS,
   LOGIN_USER,
 } from './types';
 
@@ -33,6 +34,19 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
+export const logout = () => {
+  return NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'Login' }),
+    ],
+  });
+};
+
+export const createEmployee = () => {
+  return NavigationActions.navigate({ routeName: 'EmployeeCreate' });
+};
+
 const loginUserFailure = (dispatch) => {
   dispatch({
     type: LOGIN_USER_FAILURE,
@@ -40,8 +54,15 @@ const loginUserFailure = (dispatch) => {
 };
 
 const loginUserSuccess = (dispatch, user) => {
-  const navigateToMain = NavigationActions.navigate({
-    routeName: 'Main',
+  dispatch({
+    type: LOGIN_USER_SUCCESS,
+    payload: user,
+  });
+  const navigateToMain = NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'EmployeeList' }),
+    ],
   });
   dispatch(navigateToMain);
 };
