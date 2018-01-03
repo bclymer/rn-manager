@@ -8,7 +8,7 @@ class LoginForm extends Component {
   render() {
     return (
       <Card>
-        <Text>Look I'm a new screen!</Text>
+        <Text>Look I'm a new screen! {this.props.nav}</Text>
       </Card>
     );
   }
@@ -16,6 +16,7 @@ class LoginForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    nav: state.nav,
   };
 };
 

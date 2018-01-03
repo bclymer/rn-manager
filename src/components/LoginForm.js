@@ -38,13 +38,12 @@ class LoginForm extends Component {
   renderButton() {
     if (this.props.loading) {
       return <Spinner size="large" />;
-    } else {
-      return (
-        <Button onPress={this.onButtonPress.bind(this)}>
-          Login
-        </Button>
-      );
     }
+    return (
+      <Button onPress={this.onButtonPress}>
+        Login
+      </Button>
+    );
   }
 
   render() {
@@ -54,7 +53,7 @@ class LoginForm extends Component {
           <Input
             label="Email"
             placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
+            onChangeText={this.onEmailChange}
             value={this.props.email}
           />
         </CardSection>
@@ -64,7 +63,7 @@ class LoginForm extends Component {
             secureTextEntry
             label="Password"
             placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
+            onChangeText={this.onPasswordChange}
             value={this.props.password}
           />
         </CardSection>
