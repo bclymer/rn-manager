@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { Card } from './common';
+import { Card, Button } from './common';
 
-class LoginForm extends Component {
+class MainScreen extends Component {
   render() {
     return (
       <Card>
-        <Text>Look I'm a new screen! {this.props.nav}</Text>
+        <Text>Look I'm a new screen!</Text>
+        <Button onPress={() => this.props.navigation.goBack()}>GO BACK</Button>
       </Card>
     );
   }
 }
+
+MainScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -20,4 +26,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(LoginForm);
+export default connect(mapStateToProps)(MainScreen);

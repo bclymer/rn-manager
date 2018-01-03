@@ -4,7 +4,6 @@ import { NavigationActions } from 'react-navigation';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
-  LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
   LOGIN_USER,
 } from './types';
@@ -28,8 +27,7 @@ export const loginUser = ({ email, password }) => {
     dispatch({ type: LOGIN_USER });
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         loginUserFailure(dispatch);
       });
   };

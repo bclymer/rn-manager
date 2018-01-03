@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
@@ -40,7 +41,7 @@ class LoginForm extends Component {
       return <Spinner size="large" />;
     }
     return (
-      <Button onPress={this.onButtonPress}>
+      <Button onPress={this.onButtonPress.bind(this)}>
         Login
       </Button>
     );
@@ -53,7 +54,7 @@ class LoginForm extends Component {
           <Input
             label="Email"
             placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange}
+            onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
           />
         </CardSection>
@@ -63,7 +64,7 @@ class LoginForm extends Component {
             secureTextEntry
             label="Password"
             placeholder="password"
-            onChangeText={this.onPasswordChange}
+            onChangeText={this.onPasswordChange.bind(this)}
             value={this.props.password}
           />
         </CardSection>
@@ -77,6 +78,23 @@ class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  emailChanged: PropTypes.func.isRequired,
+  passwordChanged: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+};
+
+LoginForm.defaultProps = {
+  email: '',
+  password: '',
+  error: '',
+  loading: false,
+};
 
 const styles = {
   errorTextStyle: {
