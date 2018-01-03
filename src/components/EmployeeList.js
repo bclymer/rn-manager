@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Card, Button } from './common';
-import { logout, createEmployee } from '../actions';
+import { logout } from '../actions/AuthActions';
+import { createEmployee } from '../actions/EmployeeActions';
 
 class EmployeeList extends Component {
   static navigationOptions = ({ navigation }) => ({

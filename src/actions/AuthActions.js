@@ -43,10 +43,6 @@ export const logout = () => {
   });
 };
 
-export const createEmployee = () => {
-  return NavigationActions.navigate({ routeName: 'EmployeeCreate' });
-};
-
 const loginUserFailure = (dispatch) => {
   dispatch({
     type: LOGIN_USER_FAILURE,
