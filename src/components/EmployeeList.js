@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Card, Button } from './common';
 import { logout } from '../actions/AuthActions';
-import { createEmployee } from '../actions/EmployeeActions';
+import { createEmployee, employeesFetch } from '../actions/EmployeeActions';
 
 class EmployeeList extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -18,6 +18,10 @@ class EmployeeList extends Component {
       </Button>
     ),
   });
+
+  componentWillMount() {
+    this.props.employeesFetch();
+  }
 
   componentDidMount() {
     this.props.navigation.setParams({
@@ -39,6 +43,7 @@ EmployeeList.propTypes = {
   navigation: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   createEmployee: PropTypes.func.isRequired,
+  employeesFetch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -47,4 +52,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logout, createEmployee })(EmployeeList);
+export default connect(mapStateToProps, { logout, createEmployee, employeesFetch })(EmployeeList);
