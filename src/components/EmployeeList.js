@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 import { Card, Button } from './common';
 import { logout } from '../actions/AuthActions';
 import { createEmployee, employeesFetch } from '../actions/EmployeeActions';
+import ListItem from './ListItem';
 
 class EmployeeList extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -21,6 +23,19 @@ class EmployeeList extends Component {
 
   componentWillMount() {
     this.props.employeesFetch();
+    this.createDataSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createDataSource(nextProps);
+  }
+
+  createDataSource({ employees }) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+
+    this.dataSource = ds.cloneWithRows(employees);
   }
 
   componentDidMount() {
@@ -29,12 +44,22 @@ class EmployeeList extends Component {
     });
   }
 
+  static renderRow(employee) {
+    return <ListItem employee={employee} />;
+  }
+
   render() {
     return (
-      <Card>
-        <Text>Look I'm a new screen!</Text>
-        <Button onPress={() => this.props.logout()}>LOGOUT</Button>
-      </Card>
+      <View>
+        <ListView
+          enableEmptySections
+          dataSource={this.dataSource}
+          renderRow={EmployeeList.renderRow}
+        />
+        <Card>
+          <Button onPress={() => this.props.logout()}>LOGOUT</Button>
+        </Card>
+      </View>
     );
   }
 }
@@ -44,11 +69,19 @@ EmployeeList.propTypes = {
   logout: PropTypes.func.isRequired,
   createEmployee: PropTypes.func.isRequired,
   employeesFetch: PropTypes.func.isRequired,
+  employees: PropTypes.array,
+};
+
+EmployeeList.defaultProps = {
+  employees: [],
 };
 
 const mapStateToProps = (state) => {
+  const employees = _.map(state.employeeList, (val, uid) => {
+    return { ...val, uid };
+  });
   return {
-    nav: state.nav,
+    employees,
   };
 };
 

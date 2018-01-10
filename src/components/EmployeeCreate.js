@@ -6,6 +6,10 @@ import { employeeUpdate, employeeCreate } from '../actions/EmployeeActions';
 import { Card, CardSection, Button, Input } from './common';
 
 class EmployeeCreate extends Component {
+  componentDidMount() {
+    console.log(this.props.navigation.state);
+  }
+
   onButtonPress() {
     const { name, phone, shift } = this.props;
     this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
@@ -66,6 +70,7 @@ EmployeeCreate.propTypes = {
   shift: PropTypes.string,
   employeeUpdate: PropTypes.func.isRequired,
   employeeCreate: PropTypes.func.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 
 EmployeeCreate.defaultProps = {

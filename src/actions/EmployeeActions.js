@@ -7,8 +7,11 @@ import {
   EMPLOYEES_FETCH_SUCCESS,
 } from './types';
 
-export const createEmployee = () => {
-  return NavigationActions.navigate({ routeName: 'EmployeeCreate' });
+export const createEmployee = (employee) => {
+  return NavigationActions.navigate({
+    routeName: 'EmployeeCreate',
+    params: { employee },
+  });
 };
 
 export const employeeUpdate = ({ prop, value }) => {
@@ -16,6 +19,10 @@ export const employeeUpdate = ({ prop, value }) => {
     type: EMPLOYEE_UPDATE,
     payload: { prop, value },
   };
+};
+
+export const editEmployee = () => {
+  return NavigationActions.navigate({ routeName: 'EmployeeCreate' });
 };
 
 export const employeeCreate = ({ name, phone, shift }) => {
@@ -34,7 +41,7 @@ export const employeesFetch = () => {
   return (dispatch) => {
     const { currentUser } = firebase.auth();
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
-      .on('value', snapshot => {
+      .on('value', (snapshot) => {
         dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
       });
   };
